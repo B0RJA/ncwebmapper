@@ -80,6 +80,18 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 	dx    <- lon[2] - lon[1]
 	dy    <- lat[2] - lat[1]
 
+	if(dx < 0)
+	{
+		dx <- -dx
+		lon <- rev(lon)
+	}
+
+	if(dy < 0)
+	{
+		dy <- -dy
+		lat <- rev(lat)
+	}
+	
 	print(c(lon[1], lon[2], lat[1], lat[2], dx, dy))
 	
 	# per-session temporary directory
