@@ -179,6 +179,7 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 				}else{
 					data <- datarange
 				}
+				print(dim(data))
 				#data <- apply(data, 1, rev)
 				# warp to mercator
 				m <- array(data[index], dim=dim(index))
