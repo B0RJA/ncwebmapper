@@ -70,8 +70,6 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 
 	times <- times[1:2]
 	ntime <- length(times)
-	
-	print(times, ntime)
 
 	# read spatial dims
 	dimNames <- returnXYNames(nc)
@@ -93,9 +91,7 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 		dy <- -dy
 		lat <- rev(lat)
 	}
-	
-	print(c(lon[1], lon[2], lat[1], lat[2], dx, dy))
-	
+
 	# per-session temporary directory
 	tempdir <- tempdir()
 
@@ -112,9 +108,7 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 	}
 
 	# warp to mercator
-	print(1)
 	r.crs <- raster_3857(nc, epsg)
-	print(2)
 	
 	# read extent
 	map1x <- extent(r.crs)[1]
@@ -178,7 +172,6 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 
 			# read matrix
 			datarange <- ncvar_get(nc, nc$var[[1]]$name, c(1, 1, time), c(-1, -1, range))
-			datarange <- apply(datarange, 2, rev)
 
 			for(t in 0:(range-1)){
 				if(range>1){
@@ -186,6 +179,7 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 				}else{
 					data <- datarange
 				}
+				data <- apply(data, 2, rev)
 				# warp to mercator
 				m <- array(data[index], dim=dim(index))
 
