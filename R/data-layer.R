@@ -165,6 +165,7 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 		index <- raster::as.matrix(r.crs.ok)
 		range <- 100
 		# for each time
+		print(c(length(times)), range)
 		for(time in seq(from=1, to=length(times), by=range))
 		{
 			# set progress bar
