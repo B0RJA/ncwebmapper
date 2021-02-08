@@ -70,6 +70,8 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 
 	times <- times[1:2]
 	ntime <- length(times)
+	
+	print(times, ntime)
 
 	# read spatial dims
 	dimNames <- returnXYNames(nc)
