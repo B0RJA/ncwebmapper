@@ -68,6 +68,9 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 	times <- nc$dim[["time"]]$vals
 	ntime <- length(times)
 
+	times <- times[1:2]
+	ntime <- length(times)
+
 	# read spatial dims
 	dimNames <- returnXYNames(nc)
 	nrow  <- nc$dim[[dimNames$Y]]$len
@@ -77,6 +80,8 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 	dx    <- lon[2] - lon[1]
 	dy    <- lat[2] - lat[1]
 
+	print(c(lon[1], lon[2], lat[1], lat[2], dx, dy))
+	
 	# per-session temporary directory
 	tempdir <- tempdir()
 
