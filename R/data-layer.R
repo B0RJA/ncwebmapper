@@ -65,7 +65,7 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 	}
 
 	# read times
-	times <- nc$dim[["time"]]$vals
+	times <- nc$dim[["Time"]]$vals
 	ntime <- length(times)
 
 	times <- times[1:2]
