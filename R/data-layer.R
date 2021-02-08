@@ -178,6 +178,7 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 
 			# read matrix
 			datarange <- ncvar_get(nc, nc$var[[1]]$name, c(1, 1, time), c(-1, -1, range))
+			datarange <- apply(datarange, 2, rev)
 
 			for(t in 0:(range-1)){
 				if(range>1){
