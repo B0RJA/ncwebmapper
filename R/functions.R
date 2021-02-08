@@ -61,7 +61,13 @@ raster_3857 <- function(nc, epsg){
   lat   <- nc$dim[[dimNames$Y]]$vals
   dx    <- lon[2] - lon[1]
   dy    <- lat[2] - lat[1]
-
+  
+	if(dy < 0)
+	{
+		dy <- -dy
+		lat <- rev(lat)
+	}
+  
   # create empty raster
   data <- array(numeric(), c(nrow, ncol))
   r <- raster(data[c(nrow:1),])
