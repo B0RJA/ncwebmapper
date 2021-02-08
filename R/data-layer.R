@@ -110,8 +110,10 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 	}
 
 	# warp to mercator
+	print(1)
 	r.crs <- raster_3857(nc, epsg)
-
+	print(2)
+	
 	# read extent
 	map1x <- extent(r.crs)[1]
 	map2x <- extent(r.crs)[2]
