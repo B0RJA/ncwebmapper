@@ -65,7 +65,11 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 	}
 
 	# read times
-	times <- nc$dim[["Time"]]$vals
+	times <- nc$dim[["time"]]$vals
+	if(is.null(times))
+	{
+		times <- nc$dim[["Time"]]$vals
+	}
 	ntime <- length(times)
 
 	#times <- times[1:2]
@@ -105,7 +109,7 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 
 	# warp to mercator
 	r.crs <- raster_3857(nc, epsg)
-	
+
 	# read extent
 	map1x <- extent(r.crs)[1]
 	map2x <- extent(r.crs)[2]
