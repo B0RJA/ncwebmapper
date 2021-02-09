@@ -68,8 +68,8 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 	times <- nc$dim[["Time"]]$vals
 	ntime <- length(times)
 
-	times <- times[1:2]
-	ntime <- length(times)
+	#times <- times[1:2]
+	#ntime <- length(times)
 
 	# read spatial dims
 	dimNames <- returnXYNames(nc)
@@ -80,16 +80,12 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 	dx    <- lon[2] - lon[1]
 	dy    <- lat[2] - lat[1]
 
-	if(dx < 0)
-	{
-		dx <- -dx
-		lon <- rev(lon)
-	}
-
+	vflip <- FALSE
 	if(dy < 0)
 	{
 		dy <- -dy
 		lat <- rev(lat)
+		vflip <- TRUE
 	}
 
 	# per-session temporary directory
@@ -179,7 +175,11 @@ write_data_layer <- function(file, folder, epsg, maxzoom, timeshift = 0)
 				}else{
 					data <- datarange
 				}
-				data <- data[,dim(data)[2]:1]
+
+				if(vflip){
+					data <- data[,dim(data)[2]:1]
+				}
+
 				# warp to mercator
 				m <- array(data[index], dim=dim(index))
 
