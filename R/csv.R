@@ -123,7 +123,7 @@ write_csv <- function(file, folder, epsg, dates, formatdates)
 
 				# output table
 				table <- array(numeric(), c(ntime, 2))
-				colnames(table) <- c(nc$dim[["time"]]$units, nc$var[[1]]$name)
+				colnames(table) <- c(nc$dim[["Time"]]$units, nc$var[[1]]$name)
 				table[,1] <- format(times)
 				table[,2] <- signif(matrix[i,], digits = 5)
 				table[table=="NaN"] <- NA
